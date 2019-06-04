@@ -5,11 +5,12 @@ with open("README.md", "r") as f:
 
 setuptools.setup(
       name='deepex',
-      version='0.0.5',
+      version='0.0.6',
       description='DeepEX is a universal convenient frame with keras and Tensorflow. You can get well-known Wide&Deep model such as DeepFM here. Or, you can define you custom model use this frame.',
       long_description=long_description,
       long_description_content_type="text/markdown",	
       url='https://github.com/FlashSnail/DeepEX',
+      download_url='https://github.com/FlashSnail/DeepEX/tags',
       author='zhangzehua',
       author_email='zzh_0729@foxmail.com',
 	  python_requires=">=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*",
