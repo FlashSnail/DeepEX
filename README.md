@@ -19,7 +19,7 @@ Or, you can define you custom model use this frame.
 * For Linux:
 
 ```shell
-pip install DeepEX
+pip install deepex
 ```
 
 * For Windows:
@@ -27,7 +27,7 @@ pip install DeepEX
 You need active cmd first and, 
 
 ```powershell
-pip install DeepEX
+pip install deepex
 ```
 
 Notice: This frame needs keras and tensorflow, maybe it has some problem on windows with python 2.x because of tensorflow.
@@ -162,13 +162,13 @@ This class is very easy to use,  three steps to go：
 
 ```python
 # step 1, declare DeepEX object
-DeepEX = DeepEX(...)
+deepEX = DeepEX(...)
 
 # step 2, get model you want
-model = DeepEX.deepfm()
+model = deepEX.deepfm()
 
 # step 3, train and save
-DeepEX.fit(...)
+deepEX.fit(...)
 ```
 
 ### example
