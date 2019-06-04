@@ -12,7 +12,7 @@ setuptools.setup(
       url='https://github.com/FlashSnail/DeepEX',
       author='zhangzehua',
       author_email='zzh_0729@foxmail.com',
-	  python_requires=">=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*"
+	  python_requires=">=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*",
       packages=setuptools.find_packages(),
       classifiers=[
           "Programming Language :: Python :: 3",
