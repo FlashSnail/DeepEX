@@ -1,9 +1,7 @@
 import setuptools
 setuptools.setup(name='deepex',
-      version='0.0.1',
-      description='DeepEX is a universal convenient frame with keras and Tensorflow. 
-      You can get well-known Wide&Deep model such as DeepFM here. 
-      Or, you can define you custom model use this frame.',
+      version='0.0.4',
+      description='DeepEX is a universal convenient frame with keras and Tensorflow. You can get well-known Wide&Deep model such as DeepFM here. Or, you can define you custom model use this frame.',
       url='https://github.com/FlashSnail/DeepEX',
       author='zhangzehua',
       author_email='zzh_0729@foxmail.com',
@@ -16,7 +14,7 @@ setuptools.setup(name='deepex',
       ],
       install_requires=[
         'numpy>=1.16.2',
-        'keras>=2.2.4',
-        'Tensorflow>=1.12.0'
+        'keras>=2.2.4'
+        #'Tensorflow>=1.12.0'
       ]      
       )

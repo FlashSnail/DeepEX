@@ -210,7 +210,7 @@ class DeepEX:
         return model
     
     def deepfm(self):
-        from model import deepfm
+        from .model import deepfm
         model = deepfm.deepfm(self.embeddings,self.numerics,self.aggregate_flag,
                       self.deep_model,self.class_num,self.inputs,self.metrics,
                       self.auc,self.optimizer)

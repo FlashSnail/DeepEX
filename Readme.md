@@ -173,8 +173,8 @@ DeepEX.fit(...)
 
 ### example
 
-```pyth
-from DeepEX import *
+```python
+from deepex import *
 import numpy as np
 
 samples = 100000    # set samples num
@@ -185,15 +185,15 @@ x[:,3] = cate   # chose a column to be categroy feat
 y = np.random.randint(0,2,samples)  # generate label
 
 # declare DeepEX objects
-DeepEX = DeepEX(data = x, feature_dim=feat_dim, category_index=2, embedding_dict_size=1000, 
+deepEX = DeepEX(data = x, feature_dim=feat_dim, category_index=2, embedding_dict_size=1000, 
 embedding_size=64, depths_size = [1024,256,64], class_num=2, 
 aggregate_flag=False, metrics=None, optimizer='Adam')
 
-model = DeepEX.deepfm()  # get DeepFM
+model = deepEX.deepfm()  # get DeepFM
 plot_model(model,'deepFM.png',show_shapes=True) # show model graph
 
 # train deepfm
-DeepEX.fit(model, y, save_model_path='deepfm.model', batch_size=None, epochs=1, verbose=1, callbacks=None, 
+deepEX.fit(model, y, save_model_path='deepfm.model', batch_size=None, epochs=1, verbose=1, callbacks=None, 
 validation_split=0.0, validation_data=None, shuffle=True, class_weight=None, 
 sample_weight=None, initial_epoch=0, steps_per_epoch=None, validation_steps=None)
 ```
