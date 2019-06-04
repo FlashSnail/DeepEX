@@ -69,11 +69,11 @@ def deepfm(embeddings,numerics,aggregate_flag,
            auc,optimizer):
     
     first_order, second_order = fm(embeddings,numerics,aggregate_flag)
-    model = concatenate([deep_model,first_order, second_order])
+    fc7 = concatenate([deep_model,first_order, second_order])
     if class_num > 2:
-        model = Dense(class_num, activation='softmax')(model)
+        model = Dense(class_num, activation='softmax')(fc7)
     else:
-        model = Dense(1, activation='sigmoid')(model)
+        model = Dense(1, activation='sigmoid')(fc7)
     model = Model(inputs=inputs,outputs=model)
     
     if class_num > 2:
@@ -85,7 +85,7 @@ def deepfm(embeddings,numerics,aggregate_flag,
         
     model.compile(optimizer=optimizer, loss=loss, metrics = metrics)
     model.summary()
-    return model
+    return model, fc7
 
 if __name__ == '__main__':
     pass

@@ -211,7 +211,7 @@ class DeepEX:
     
     def deepfm(self):
         from .model import deepfm
-        model = deepfm.deepfm(self.embeddings,self.numerics,self.aggregate_flag,
+        model, self.fc7 = deepfm.deepfm(self.embeddings,self.numerics,self.aggregate_flag,
                       self.deep_model,self.class_num,self.inputs,self.metrics,
                       self.auc,self.optimizer)
         return model
@@ -220,6 +220,7 @@ if __name__ == '__main__':
     
     '''
     # HOW TO USE, here is a demo
+    # However, if you run this code directly, you should remove dot at "from .model import deepfm" 
     '''
     
     samples = 100000    # set samples num
@@ -241,7 +242,6 @@ if __name__ == '__main__':
     deepEX.fit(model, y, save_model_path=None, batch_size=None, epochs=1, verbose=1, callbacks=None, 
               validation_split=0.0, validation_data=None, shuffle=True, class_weight=None, 
               sample_weight=None, initial_epoch=0, steps_per_epoch=None, validation_steps=None)
-
 
 
     

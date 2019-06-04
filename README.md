@@ -117,7 +117,7 @@ get deep part
 
 ### deepfm
 
-get deepfm model
+get deepfm model, fc7 which is the last layer before classifier, it will be a class variable
 
 **return**
 
