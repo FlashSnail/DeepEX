@@ -1,6 +1,6 @@
 import setuptools
 setuptools.setup(name='deepex',
-      version='0.01',
+      version='0.0.1',
       description='DeepEX is a universal convenient frame with keras and Tensorflow. 
       You can get well-known Wide&Deep model such as DeepFM here. 
       Or, you can define you custom model use this frame.',

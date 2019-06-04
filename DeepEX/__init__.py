@@ -1,6 +1,8 @@
 # coding: utf-8
 
-from .core import *
+from .DeepEX import *
+
+name = "deepex"
 
 def start():
-    print("import zzhfun successful")
+    print("import DeepEX successful")
