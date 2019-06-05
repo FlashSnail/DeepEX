@@ -22,13 +22,14 @@ import tensorflow as tf
 from keras.layers import *
 from keras.models import Model
 from keras.utils import plot_model
+from keras.models import load_model
 from keras import backend as K
 os.environ['KERAS_BACKEND'] = 'tensorflow'
 
 class DeepEX:
     def __init__(self, data, feature_dim=None, category_index=None,\
                  embedding_dict_size=1000, embedding_size=64, depths_size = [1024,256,64], \
-                 class_num=2, aggregate_flag=False, metrics=None, optimizer='Adam'):
+                 class_num=2, aggregate_flag=False, metrics=None, optimizer='Adam', activation='relu'):
         '''
         
         data: np.array
@@ -74,7 +75,20 @@ class DeepEX:
         self.get_embedding_layer()
         # set self.deep_model
         self.deep()
-    
+        
+        
+    def get_fc7_output(self, model_path = None, layer_name = 'fc7', data = None):
+        assert model_path is not None, "Sorry, you need give a model path"
+        model = load_model(model_path)
+        if data is None:
+            x = self.data_split
+        else:
+            x = data
+        intermediate_layer_model = Model(inputs=model.input,
+                                         outputs=model.get_layer(layer_name).output)
+        intermediate_output = intermediate_layer_model.predict(x)
+        return intermediate_output
+        
     def auc(self, y_true, y_pred):
         try:
             auc = tf.metrics.auc(y_true, y_pred)[1]
@@ -98,7 +112,7 @@ class DeepEX:
         model.fit(x, y, batch_size, epochs, verbose, callbacks, 
               validation_split, validation_data, shuffle, class_weight, 
               sample_weight, initial_epoch, steps_per_epoch, validation_steps)
-        
+    
         if save_model_path:
             model.save(save_model_path)
             print ("model has been saved at "+ str(save_model_path))
@@ -202,15 +216,15 @@ class DeepEX:
     
     def deep(self):
         model = Dense(self.depths_size[0])(self.embedding_layer)
-        model = Activation('relu')(model)
+        model = Activation(activation)(model)
         for depth in self.depths_size[1:]:
             model = Dense(depth)(model)
-            model = Activation('relu')(model)
+            model = Activation(activation)(model)
         self.deep_model = model
         return model
     
     def deepfm(self):
-        from .model import deepfm
+        from model import deepfm
         model, self.fc7 = deepfm.deepfm(self.embeddings,self.numerics,self.aggregate_flag,
                       self.deep_model,self.class_num,self.inputs,self.metrics,
                       self.auc,self.optimizer)
@@ -233,15 +247,18 @@ if __name__ == '__main__':
     # declare DeepEX objects
     deepEX = DeepEX(data = x, feature_dim=feat_dim, category_index=[[0]], embedding_dict_size=1000, 
                   embedding_size=64, depths_size = [1024,256,64], class_num=2, 
-                  aggregate_flag=False, metrics=None, optimizer='Adam')
+                  aggregate_flag=False, metrics=None, optimizer='Adam', activation='relu')
     
     model = deepEX.deepfm()  # get DeepFM
     plot_model(model,'deepFM.png',show_shapes=True) # show model graph
     
     # train deepfm
-    deepEX.fit(model, y, save_model_path=None, batch_size=None, epochs=1, verbose=1, callbacks=None, 
+    path = None
+    deepEX.fit(model, y, save_model_path=path, batch_size=None, epochs=1, verbose=1, callbacks=None, 
               validation_split=0.0, validation_data=None, shuffle=True, class_weight=None, 
               sample_weight=None, initial_epoch=0, steps_per_epoch=None, validation_steps=None)
-
-
+    
+    # get fc7 output tensor
+    fc7 = deepEX.get_fc7_output(model_path=path, layer_name='fc7', data=deepEX.data_split)
+    
     

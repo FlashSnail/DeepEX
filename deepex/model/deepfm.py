@@ -69,7 +69,7 @@ def deepfm(embeddings,numerics,aggregate_flag,
            auc,optimizer):
     
     first_order, second_order = fm(embeddings,numerics,aggregate_flag)
-    fc7 = concatenate([deep_model,first_order, second_order])
+    fc7 = concatenate([deep_model,first_order, second_order], name='fc7')
     if class_num > 2:
         model = Dense(class_num, activation='softmax')(fc7)
     else:
