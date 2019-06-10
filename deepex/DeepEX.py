@@ -29,7 +29,7 @@ os.environ['KERAS_BACKEND'] = 'tensorflow'
 class DeepEX:
     def __init__(self, data, feature_dim=None, category_index=None,\
                  embedding_dict_size=1000, embedding_size=64, depths_size = [1024,256,64], \
-                 class_num=2, aggregate_flag=False, metrics=None, optimizer='Adam', activation='relu'):
+                 class_num=2, aggregate_flag=False, metrics=None, optimizer='Adam', activation='relu', embedding_way='dense'):
         '''
         
         data: np.array
@@ -57,6 +57,10 @@ class DeepEX:
         
         optimizer: Network optimizer, default adam
         
+        activation: Network activation, default relu
+        
+        embedding_way: How network to do embedding, Embedding layer or Dense layer
+        
         '''
         assert data is not None, "Sorry, you need give x_data to DeepEX"
         self.data = data
@@ -71,6 +75,7 @@ class DeepEX:
         self.optimizer = optimizer
         self.deep_model = None
         self.activation = activation
+        self.embedding_way = embedding_way
         
         # set self.inputs, self.numerics, self.embeddings, self.embedding_layer
         self.get_embedding_layer()
@@ -149,8 +154,11 @@ class DeepEX:
                     self.data_split.append(self.data[:,start:end])
                 #category feature
                 input_category = Input(shape=(len(field),), name='input_category'+str(index))
-                embedding = Embedding(self.embedding_dict_size, self.embedding_size,\
-                                   input_length=len(field), name='embedding'+str(index))(input_category)
+                if self.embedding_way == 'dense':
+                    embedding = Dense(self.embedding_size, activation='tanh', name='embedding'+str(index))(input_category)
+                else:
+                    embedding = Embedding(self.embedding_dict_size, self.embedding_size,\
+                                          input_length=len(field), name='embedding'+str(index))(input_category)
                 embeddings.append(embedding)
 
                 '''
@@ -200,8 +208,11 @@ class DeepEX:
                 input_layer = Input(shape=(1,), name='input_layer'+str(i))
                 inputs.append(input_layer)
                 self.data_split.append(self.data[:,i])
-                embedding = Embedding(self.embedding_dict_size, self.embedding_size,\
-                                   input_length=1, name='embedding'+str(i))(input_layer)
+                if self.embedding_way == 'dense':
+                    embedding = Dense(self.embedding_size, activation='tanh', name='embedding'+str(i))(input_layer)
+                else:
+                    embedding = Embedding(self.embedding_dict_size, self.embedding_size,\
+                                          input_length=1, name='embedding'+str(i))(input_layer)
                 embeddings.append(embedding)
                 shape = int(np.prod(embedding.shape[1:]))
                 embedding = Reshape((shape,))(embedding)

@@ -43,7 +43,8 @@ In the functional API, given some parmeters, you can instantiate a `DeepEX` obje
 ```python
 DeepEX(data = None, feature_dim=None, category_index=None,embedding_dict_size=1000,
       embedding_size=64, depths_size = [1024,256,64],class_num=2,
-      aggregate_flag=False, metrics=None, optimizer='Adam', activation='relu')
+      aggregate_flag=False, metrics=None, optimizer='Adam', activation='relu',
+      embedding_way='dense')
 ```
 
 Only data is necessary, other parmeters have default value.
@@ -51,21 +52,34 @@ Only data is necessary, other parmeters have default value.
 **Arguments**
 
 * **data**: np.array
+
 * **feature_dim**: integer, feature dimension
+
 * **category_index**: 
+  
   * Can be a 2D list, like [A,B], A and B also a list, if len(A)>1, that means the element of A belong to a field, and will be input embedding layer together.
   * Can be a integer, it specific feature_dim % integer == 0, that means split feature as equal intervals with category_index
   * If None, all of feature will be embedding
+  
 * **embedding_dict_size**: embedding dict size of categroy feature
+
 * **embedding_size**: embedding size, it make output size like (?, len(category_index), embedding_size)
+
 * **depths_size**: network of deep part parameter, last dimension means fc7 shape
+
 * **class_num**: multi class or binary class
+
 * **aggregate_flag**: 
   * if True, first_order and second_order of FM part output as (?,1)
   * if False, output as (?, len(category_index)) and (?, embedding_size)
+  
 * **metrics**: can recive custom metrics, if None, binary class use AUC, multi class use auccary
+
 * **optimizer**: Network optimizer, default adam,  see [optimizer](https://keras.io/optimizers/).
+
 * **activation**: Deep part activation, default relu, see [activations](https://keras.io/activations/).
+
+* **embedding_way**: How network to do embedding, Embedding layer or Dense layer
 
 
 

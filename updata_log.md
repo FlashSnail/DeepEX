@@ -2,6 +2,12 @@
 
 [TOC]
 
+## v0.0.11
+
+**update time: 2019.06.10**
+
+From now，embedding can chose Embedding layer or Dense layer
+
 ## v0.0.10
 
 **update time: 2019.06.10**
