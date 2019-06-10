@@ -211,7 +211,7 @@ y = np.random.randint(0,2,samples)  # generate label
 # declare DeepEX objects
 deepEX = DeepEX(data = x, feature_dim=feat_dim, category_index=2, embedding_dict_size=1000, 
 embedding_size=64, depths_size = [1024,256,64], class_num=2, 
-aggregate_flag=False, metrics=None, optimizer='Adam', activation='relu')
+aggregate_flag=False, metrics=None, optimizer='Adam', activation='relu', embedding_way='emb')
 
 model = deepEX.deepfm()  # get DeepFM
 plot_model(model,'deepFM.png',show_shapes=True) # show model graph

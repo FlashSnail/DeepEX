@@ -2,6 +2,12 @@
 
 [TOC]
 
+## v0.0.12
+
+**update time: 2019.06.10**
+
+Fix a bug, embedding way choise Dense, output should be resize (?, 1, embedding_size)
+
 ## v0.0.11
 
 **update time: 2019.06.10**
