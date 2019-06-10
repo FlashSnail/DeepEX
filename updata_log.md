@@ -2,6 +2,12 @@
 
 [TOC]
 
+## v0.0.10
+
+**update time: 2019.06.10**
+
+Fix a activation bug
+
 ## v0.0.9
 
 **update time: 2019.06.05**
