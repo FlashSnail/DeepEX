@@ -70,6 +70,7 @@ class DeepEX:
         self.metrics = metrics
         self.optimizer = optimizer
         self.deep_model = None
+        self.activation = activation
         
         # set self.inputs, self.numerics, self.embeddings, self.embedding_layer
         self.get_embedding_layer()
@@ -216,10 +217,10 @@ class DeepEX:
     
     def deep(self):
         model = Dense(self.depths_size[0])(self.embedding_layer)
-        model = Activation(activation)(model)
+        model = Activation(self.activation)(model)
         for depth in self.depths_size[1:]:
             model = Dense(depth)(model)
-            model = Activation(activation)(model)
+            model = Activation(self.activation)(model)
         self.deep_model = model
         return model
     
