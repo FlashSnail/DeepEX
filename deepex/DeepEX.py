@@ -156,6 +156,7 @@ class DeepEX:
                 input_category = Input(shape=(len(field),), name='input_category'+str(index))
                 if self.embedding_way == 'dense':
                     embedding = Dense(self.embedding_size, activation='tanh', name='embedding'+str(index))(input_category)
+                    embedding = Reshape((1,self.embedding_size))(embedding)
                 else:
                     embedding = Embedding(self.embedding_dict_size, self.embedding_size,\
                                           input_length=len(field), name='embedding'+str(index))(input_category)
@@ -210,6 +211,7 @@ class DeepEX:
                 self.data_split.append(self.data[:,i])
                 if self.embedding_way == 'dense':
                     embedding = Dense(self.embedding_size, activation='tanh', name='embedding'+str(i))(input_layer)
+                    embedding = Reshape((1,self.embedding_size))(embedding)
                 else:
                     embedding = Embedding(self.embedding_dict_size, self.embedding_size,\
                                           input_length=1, name='embedding'+str(i))(input_layer)
