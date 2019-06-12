@@ -85,7 +85,7 @@ class DeepEX:
         
     def get_fc7_output(self, model_path = None, layer_name = 'fc7', data = None):
         assert model_path is not None, "Sorry, you need give a model path"
-        model = load_model(model_path)
+        model = load_model(model_path, compile=False)
         if data is None:
             x = self.data_split
         else:
@@ -267,7 +267,7 @@ if __name__ == '__main__':
     plot_model(model,'deepFM.png',show_shapes=True) # show model graph
     
     # train deepfm
-    path = None
+    path = 'deepfm.model'
     deepEX.fit(model, y, save_model_path=path, batch_size=None, epochs=1, verbose=1, callbacks=None, 
               validation_split=0.0, validation_data=None, shuffle=True, class_weight=None, 
               sample_weight=None, initial_epoch=0, steps_per_epoch=None, validation_steps=None)
