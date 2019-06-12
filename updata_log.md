@@ -2,6 +2,12 @@
 
 [TOC]
 
+## v0.0.13
+
+**update time: 2019.06.12**
+
+Because of custom metrixs are used when model compile, however, when load exists model, compile will assert a error
+
 ## v0.0.12
 
 **update time: 2019.06.10**
