@@ -67,7 +67,7 @@ Only data is necessary, other parmeters have default value.
 
 * **depths_size**: network of deep part parameter, last dimension means fc7 shape
 
-* **class_num**: multi class or binary class
+* **class_num**: multi class or binary class, if class_num < 2, you will get a regression model
 
 * **aggregate_flag**: 
   * if True, first_order and second_order of FM part output as (?,1)

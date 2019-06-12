@@ -2,6 +2,12 @@
 
 [TOC]
 
+## v0.0.14
+
+**update time: 2019.06.12**
+
+Add regression mode support: if class_num < 2, you can get a regression model
+
 ## v0.0.13
 
 **update time: 2019.06.12**

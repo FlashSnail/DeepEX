@@ -72,16 +72,21 @@ def deepfm(embeddings,numerics,aggregate_flag,
     fc7 = concatenate([deep_model,first_order, second_order], name='fc7')
     if class_num > 2:
         model = Dense(class_num, activation='softmax')(fc7)
-    else:
+    elif class_num == 2:
         model = Dense(1, activation='sigmoid')(fc7)
+    else:
+        model = Dense(1)(fc7)
     model = Model(inputs=inputs,outputs=model)
     
     if class_num > 2:
         loss = 'categorical_crossentropy'
         metrics = ['accuracy'] if metrics is None else metrics
-    else:
+    elif class_num == 2:
         loss = 'binary_crossentropy'
         metrics = [auc] if metrics is None else metrics
+    else:
+        loss = 'mean_squared_error'
+        metrics = ['mse','mae'] if metrics is None else metrics
         
     model.compile(optimizer=optimizer, loss=loss, metrics = metrics)
     model.summary()
