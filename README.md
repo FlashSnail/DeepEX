@@ -57,9 +57,13 @@ Only data is necessary, other parmeters have default value.
 
 * **category_index**: 
   
-  * Can be a 2D list, like [A,B], A and B also a list, if len(A)>1, that means the element of A belong to a field, and will be input embedding layer together.
-  * Can be a integer, it specific feature_dim % integer == 0, that means split feature as equal intervals with category_index
-  * If None, all of feature will be embedding
+  1. Can be a 2D list, like [A,B], A and B also a list, if len(A)>1, that means the element of A belong to a field, and will be input embedding layer together.
+  
+  2. Can be a integer, it specific feature_dim % integer == 0, that means split feature as equal intervals with category_index
+  
+  3. If None, all of feature will be embedding
+  
+  4. *NEW UPDATE: Can be a mix type, like [A,B,c], A and B is list but c is a integer. It can achive more flexible way of split field, A and B will be split as col.1 and the rest of element will be split as col.2 with parameter c. Notice: c must be the last element, and the count of remaining element can be evenly divisible by c* 
   
 * **embedding_dict_size**: embedding dict size of categroy feature
 
@@ -209,7 +213,7 @@ x[:,3] = cate   # chose a column to be categroy feat
 y = np.random.randint(0,2,samples)  # generate label
 
 # declare DeepEX objects
-deepEX = DeepEX(data = x, feature_dim=feat_dim, category_index=2, embedding_dict_size=1000, 
+deepEX = DeepEX(data = x, feature_dim=feat_dim, category_index=[0,1],4, embedding_dict_size=1000, 
 embedding_size=64, depths_size = [1024,256,64], class_num=2, 
 aggregate_flag=False, metrics=None, optimizer='Adam', activation='relu', embedding_way='emb')
 

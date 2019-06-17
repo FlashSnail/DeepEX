@@ -2,6 +2,12 @@
 
 [TOC]
 
+## v0.0.15
+
+**update time: 2019.06.17**
+
+**More flexible category_index parameter**: Now, this parameter can be a mix type, like [A,B,c], A and B is list but c is a integer. It can achive more flexible way of split field, A and B will be split as col.1 and the rest of element will be split as col.2 with parameter c. Notice: c must be the last element, and the count of remaining element can be evenly divisible by c
+
 ## v0.0.14
 
 **update time: 2019.06.12**
@@ -43,4 +49,4 @@ Fix a bug
 **update time: 2019.06.05**
 
 1. **Activation**: When declare a `DeepEX` object, custom activation can give to deep network 
-2. **FC7**: FC7 layer output can get from `get_fc7_output()` function.
+2. **FC7**: FC7 layer output can get from `get_fc7_output()` functionq

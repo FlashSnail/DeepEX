@@ -146,6 +146,15 @@ class DeepEX:
             start = 0
             for index, field in enumerate(self.category_index):
                 # split input_numeric and input_category, after embedding, concat these layers
+                
+                if isinstance(field, int):
+                    # For fix type category_index, integer must be the last element
+                    assert index == len(self.category_index)-1, "Sorry, for fix type category_index, integer must be the last element"
+                    assert (self.feature_dim-start) % field == 0, "Sorry, remaining element cannot be evenly divisible by %d." % field
+                    for i in range(int((self.feature_dim-start) / field)):
+                        self.category_index.append(list(range(start+field*i, start+field*(i+1))))
+                    continue
+                
                 end = field[0]
                 #numeric feature
                 if end > start:
@@ -259,7 +268,7 @@ if __name__ == '__main__':
     y = np.random.randint(0,2,samples)  # generate label
     
     # declare DeepEX objects
-    deepEX = DeepEX(data = x, feature_dim=feat_dim, category_index=[[0]], embedding_dict_size=1000, 
+    deepEX = DeepEX(data = x, feature_dim=feat_dim, category_index=[[0,1],4], embedding_dict_size=1000, 
                   embedding_size=64, depths_size = [1024,256,64], class_num=2, 
                   aggregate_flag=False, metrics=None, optimizer='Adam', activation='relu', embedding_way='emb')
     
