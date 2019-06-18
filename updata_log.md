@@ -2,6 +2,12 @@
 
 [TOC]
 
+## v0.0.16
+
+**update time: 2019.06.18**
+
+**Fix tf.nn.softmax() type error: softmax get an unexpected keyword argument 'axis' when multi-classification**: It's all because keras and tensorflow version are not match.
+
 ## v0.0.15
 
 **update time: 2019.06.17**

@@ -12,6 +12,7 @@ from keras.layers import *
 from keras.models import Model
 from keras.utils import plot_model
 from keras import backend as K
+import tensorflow as tf
 os.environ['KERAS_BACKEND'] = 'tensorflow'
 
 def fm(embeddings,numerics,aggregate_flag):
@@ -71,7 +72,7 @@ def deepfm(embeddings,numerics,aggregate_flag,
     first_order, second_order = fm(embeddings,numerics,aggregate_flag)
     fc7 = concatenate([deep_model,first_order, second_order], name='fc7')
     if class_num > 2:
-        model = Dense(class_num, activation='softmax')(fc7)
+        model = Dense(class_num, activation=tf.nn.softmax)(fc7)
     elif class_num == 2:
         model = Dense(1, activation='sigmoid')(fc7)
     else:

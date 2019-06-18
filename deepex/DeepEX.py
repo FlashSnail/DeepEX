@@ -265,7 +265,7 @@ if __name__ == '__main__':
     cate = np.random.randint(1,6,samples)   # set a categroy feat randomly
     x = np.random.random((samples,feat_dim))    # generate feat randomly
     x[:,3] = cate   # chose a column to be categroy feat
-    y = np.random.randint(0,2,samples)  # generate label
+    y = np.random.randint(0,5,samples)  # generate label
     
     # declare DeepEX objects
     deepEX = DeepEX(data = x, feature_dim=feat_dim, category_index=[[0,1],4], embedding_dict_size=1000, 
