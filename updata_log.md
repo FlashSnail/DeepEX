@@ -2,6 +2,13 @@
 
 [TOC]
 
+## v0.0.17
+
+**update time: 2020.12.14**
+
+* Add get_wide_model() function
+* Rename deep() to get_deep_model()
+
 ## v0.0.16
 
 **update time: 2019.06.18**
