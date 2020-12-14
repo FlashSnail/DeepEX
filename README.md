@@ -104,7 +104,7 @@ embedding input data as class parameter.
 
 -----
 
-### fm
+### get_wide_model
 
 get fm part
 
@@ -114,7 +114,7 @@ get fm part
 
 -----
 
-### deep
+### get_deep_model
 
 get deep part
 
@@ -213,7 +213,7 @@ x[:,3] = cate   # chose a column to be categroy feat
 y = np.random.randint(0,2,samples)  # generate label
 
 # declare DeepEX objects
-deepEX = DeepEX(data = x, feature_dim=feat_dim, category_index=[0,1],4, embedding_dict_size=1000, 
+deepEX = DeepEX(data = x, feature_dim=feat_dim, category_index=[[0,1],4], embedding_dict_size=1000, 
 embedding_size=64, depths_size = [1024,256,64], class_num=2, 
 aggregate_flag=False, metrics=None, optimizer='Adam', activation='relu', embedding_way='emb')
 

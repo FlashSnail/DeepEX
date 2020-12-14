@@ -5,7 +5,7 @@ with open("README.md", "r") as f:
 
 setuptools.setup(
       name='deepex',
-      version='0.0.16',
+      version='0.0.17',
       description='DeepEX is a universal convenient frame with keras and Tensorflow. You can get well-known Wide&Deep model such as DeepFM here. Or, you can define you custom model use this frame.',
       long_description=long_description,
       long_description_content_type="text/markdown",	

@@ -91,7 +91,7 @@ def deepfm(embeddings,numerics,aggregate_flag,
         
     model.compile(optimizer=optimizer, loss=loss, metrics = metrics)
     model.summary()
-    return model, fc7
+    return model, fc7, first_order, second_order
 
 if __name__ == '__main__':
     pass

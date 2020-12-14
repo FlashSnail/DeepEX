@@ -80,7 +80,9 @@ class DeepEX:
         # set self.inputs, self.numerics, self.embeddings, self.embedding_layer
         self.get_embedding_layer()
         # set self.deep_model
-        self.deep()
+        self.get_deep_model()
+        
+        self.init_model = False
         
         
     def get_fc7_output(self, model_path = None, layer_name = 'fc7', data = None):
@@ -237,7 +239,7 @@ class DeepEX:
         self.embedding_layer = embedding_layer
         return self.inputs, self.numerics, self.embeddings, self.embedding_layer
     
-    def deep(self):
+    def get_deep_model(self):
         model = Dense(self.depths_size[0])(self.embedding_layer)
         model = Activation(self.activation)(model)
         for depth in self.depths_size[1:]:
@@ -245,12 +247,17 @@ class DeepEX:
             model = Activation(self.activation)(model)
         self.deep_model = model
         return model
+        
+    def get_wide_model(self):
+    	  assert self.init_model, "Sorry, you must initial a WDL model first."
+    	  return self.first_order, self.second_order
     
     def deepfm(self):
         from .model import deepfm
-        model, self.fc7 = deepfm.deepfm(self.embeddings,self.numerics,self.aggregate_flag,
+        model, self.fc7, self.first_order, self.second_order = deepfm.deepfm(self.embeddings,self.numerics,self.aggregate_flag,
                       self.deep_model,self.class_num,self.inputs,self.metrics,
                       self.auc,self.optimizer)
+        self.init_model = True
         return model
     
 if __name__ == '__main__':
